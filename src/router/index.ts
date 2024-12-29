@@ -27,6 +27,14 @@ const routes: Array<RouteRecordRaw> = [
         /* webpackChunkName: "LoCreateHackathon" */ "../views/admin/CreateHackathon.vue"
       ),
   },
+  {
+    path: "/hackathon/:id",
+    name: "HackathonDetails",
+    component: () =>
+      import(
+        /* webpackChunkName: "LoCreateHackathon" */ "../views/hackathon/HackathonDetails.vue"
+      ),
+  },
 ];
 
 const router = createRouter({

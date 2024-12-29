@@ -28,4 +28,8 @@ export type Hackathon = {
   endDate: string;
   isPublic: boolean | null;
   maxTeamSize: number | null;
+  prizes: string;
+  requirements: string;
+  overview: string;
+  themes: string;
 };

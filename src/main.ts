@@ -11,7 +11,6 @@ import { useUserStore } from "./store/useUserStore";
 import { getItem } from "./utils/storage/localStorage";
 
 const app = createApp(App).use(router);
-
 const pinia = createPinia();
 
 const theme = getItem("theme");

@@ -10,19 +10,10 @@
 </template>
 
 <script>
-import NavBar from "./components/layout/NavBar.vue";
+  import NavBar from "./components/layout/NavBar.vue";
 
-export default {
-  name: "App",
-  components: { NavBar },
-};
+  export default {
+    name: "App",
+    components: { NavBar },
+  };
 </script>
-
-<style>
-.v-navigation-drawer {
-  width: 240px;
-}
-.text-center {
-  text-align: center;
-}
-</style>

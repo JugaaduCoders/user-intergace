@@ -1,3 +1,4 @@
+import { Any } from "@/types";
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import { getItem, getUserFromLS } from "./storage/localStorage";
 
@@ -8,7 +9,7 @@ type Method = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 async function request<T>(
   type: "GET" | "POST" | "PUT" | "PATCH" | "DELETE",
   apiRoute: string,
-  data: Record<string, any> = {}
+  data: Record<string, Any> = {}
 ) {
   const baseUrl = "http://localhost:3000";
   const url = `${baseUrl}${apiRoute}`;
@@ -56,6 +57,7 @@ const requestHandler = async <R>(
   error?: Error;
   message?: string;
 }> => {
+  debugger;
   let response;
   const headers = {};
   const requestObj = { method, url, headers, ...options };
@@ -90,7 +92,7 @@ const requestHandler = async <R>(
         error: null,
       };
     }
-  } catch (error: any) {
+  } catch (error: Any) {
     if (error?.response) {
       response = {
         ...error.response.data,

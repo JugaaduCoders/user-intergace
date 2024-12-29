@@ -2,8 +2,8 @@
   <v-menu rounded>
     <template v-slot:activator="{ props }">
       <v-btn icon v-bind="props">
-        <v-avatar color="brown" size="large">
-          <span class="text-h5">{{ userStore.user?.firstName?.slice(2) }}</span>
+        <v-avatar color="brown" size="small">
+          <v-img src="https://avatar.iran.liara.run/public"></v-img>
         </v-avatar>
       </v-btn>
     </template>
@@ -11,9 +11,7 @@
       <v-card-text>
         <div class="mx-auto text-center">
           <v-avatar color="brown">
-            <span class="text-h5">{{
-              userStore.user?.firstName?.slice(2)
-            }}</span>
+            <v-img src="https://avatar.iran.liara.run/public"></v-img>
           </v-avatar>
           <h3>{{ userStore.user.firstName }}</h3>
           <p class="text-caption mt-1">

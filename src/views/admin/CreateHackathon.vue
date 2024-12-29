@@ -20,7 +20,9 @@ const errors = ref({
 });
 
 const validateForm = () => {
-  errors.value.name = formData.value.name ? "" : "Hackathon name is required.";
+  errors.value.name = formData.value.name.trim()
+    ? ""
+    : "Hackathon name is required.";
   errors.value.registrationDeadline = formData.value.registrationDeadline
     ? ""
     : "Registration Deadline is required.";
@@ -38,7 +40,7 @@ const validateForm = () => {
 const submit = () => {
   if (validateForm()) {
     console.log("Form Data:", formData.value);
-    // API call to create a hackathon (you can replace this with actual API logic)
+    // Add API logic here
   } else {
     console.error("Validation Errors:", errors.value);
   }
@@ -46,106 +48,89 @@ const submit = () => {
 </script>
 
 <template>
-  <v-container class="d-flex align-center justify-center">
-    <v-container>
-      <v-form @submit.prevent="submit">
-        <!-- Hackathon Name -->
-        <v-row justify="center" align="center">
-          <v-col sm="2"> <label for="name">Hackathon Name</label></v-col>
-          <v-col sm="3">
-            <v-text-field
-              variant="underlined"
-              v-model="formData.name"
-              :error="!!errors.name"
-              :error-messages="errors.name"
-            ></v-text-field>
-          </v-col>
-        </v-row>
+  <v-container class="d-flex flex-column align-center justify-center">
+    <h3 class="text-center mb-4">Create a Hackathon</h3>
+    <v-form @submit.prevent="submit" lazy-validation>
+      <!-- Hackathon Name -->
+      <v-text-field
+        label="Hackathon Name"
+        v-model="formData.name"
+        :error="!!errors.name"
+        :error-messages="errors.name"
+        required
+        outlined
+      ></v-text-field>
 
-        <!-- Registration Deadline -->
-        <v-row justify="center" align="center">
-          <v-col sm="2"> Registration Deadline </v-col>
-          <v-col sm="3">
-            <v-text-field
-              variant="underlined"
-              v-model="formData.registrationDeadline"
-              :error="!!errors.registrationDeadline"
-              :error-messages="errors.registrationDeadline"
-              type="date"
-            ></v-text-field>
-          </v-col>
-        </v-row>
+      <!-- Registration Deadline -->
+      <v-text-field
+        label="Registration Deadline"
+        v-model="formData.registrationDeadline"
+        :error="!!errors.registrationDeadline"
+        :error-messages="errors.registrationDeadline"
+        type="date"
+        required
+        outlined
+      ></v-text-field>
 
-        <!-- Start Date -->
-        <v-row justify="center" align="center">
-          <v-col sm="2"> Start Date </v-col>
-          <v-col sm="3">
-            <v-text-field
-              variant="underlined"
-              v-model="formData.startDate"
-              :error="!!errors.startDate"
-              :error-messages="errors.startDate"
-              type="date"
-            ></v-text-field>
-          </v-col>
-        </v-row>
+      <!-- Start Date -->
+      <v-text-field
+        label="Start Date"
+        v-model="formData.startDate"
+        :error="!!errors.startDate"
+        :error-messages="errors.startDate"
+        type="date"
+        required
+        outlined
+      ></v-text-field>
 
-        <!-- End Date -->
-        <v-row justify="center" align="center">
-          <v-col sm="2"> End Date </v-col>
-          <v-col sm="3">
-            <v-text-field
-              variant="underlined"
-              v-model="formData.endDate"
-              :error="!!errors.endDate"
-              :error-messages="errors.endDate"
-              type="date"
-            ></v-text-field>
-          </v-col>
-        </v-row>
+      <!-- End Date -->
+      <v-text-field
+        label="End Date"
+        v-model="formData.endDate"
+        :error="!!errors.endDate"
+        :error-messages="errors.endDate"
+        type="date"
+        required
+        outlined
+      ></v-text-field>
 
-        <!-- Max Team Size -->
-        <v-row justify="center" align="center">
-          <v-col sm="2"> Max Team Size </v-col>
-          <v-col sm="3">
-            <v-text-field
-              variant="underlined"
-              v-model="formData.maxTeamSize"
-              :error="!!errors.maxTeamSize"
-              :error-messages="errors.maxTeamSize"
-              type="number"
-            ></v-text-field>
-          </v-col>
-        </v-row>
+      <!-- Max Team Size -->
+      <v-text-field
+        label="Max Team Size"
+        v-model="formData.maxTeamSize"
+        :error="!!errors.maxTeamSize"
+        :error-messages="errors.maxTeamSize"
+        type="number"
+        min="1"
+        required
+        outlined
+      ></v-text-field>
 
-        <!-- Is Public -->
-        <v-row justify="center" align="center">
-          <v-col sm="2"> Is Public? </v-col>
-          <v-col sm="3">
-            <v-switch
-              v-model="formData.isPublic"
-              label="Make it Public"
-            ></v-switch>
-          </v-col>
-        </v-row>
+      <!-- Is Public -->
+      <v-switch
+        v-model="formData.isPublic"
+        label="Make Public"
+        class="mt-3"
+      ></v-switch>
 
-        <!-- Image Upload -->
-        <v-row justify="center" align="center">
-          <v-col sm="2"> Upload Image </v-col>
-          <v-col sm="3">
-            <v-file-input
-              v-model="formData.image"
-              label="Choose image"
-              accept="image/*"
-              outlined
-            ></v-file-input>
-          </v-col>
-        </v-row>
+      <!-- Image Upload -->
+      <v-file-input
+        v-model="formData.image"
+        label="Upload Hackathon Image"
+        accept="image/*"
+        outlined
+      ></v-file-input>
 
-        <v-row justify="center" align="center">
-          <my-btn type="submit">Create Hackathon</my-btn>
-        </v-row>
-      </v-form>
-    </v-container>
+      <!-- Submit Button -->
+      <v-btn class="mt-4" block color="primary" @click="submit">
+        Create Hackathon
+      </v-btn>
+    </v-form>
   </v-container>
 </template>
+
+<style scoped>
+h3 {
+  font-weight: bold;
+}
+</style>

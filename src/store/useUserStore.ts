@@ -52,7 +52,6 @@ export const useUserStore = defineStore("user", {
         const token = getTokenFromLS();
         this.token = token ?? "";
         let user = getUserFromLS();
-        setUserInLS(user);
         if (token && user && user.id) {
           await requestHandler<User>("GET", "/api/user/" + user.id).then(
             (res) => {
